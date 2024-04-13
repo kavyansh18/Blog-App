@@ -70,7 +70,7 @@ export class Service{
             return await  this.databases.getDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug
+                slug,
             )
         } catch (error) {
             console.log("Appwrite service :: getPost :: error", error);
@@ -126,5 +126,5 @@ export class Service{
         )
     }
 }
-const serive = new Service()
+const service = new Service()
 export default service
