@@ -14,27 +14,28 @@ export class AuthService {
             
     }
 
-    async createAccount({email, password, name}) {
-        try {
-            const userAccount = await this.account.create(ID.unique(), email, password, name);
-            if (userAccount) {
-                // call another method
-                return this.login({email, password});
-            } else {
-               return  userAccount;
-            }
-        } catch (error) {
-            throw error;
+    async createAccount({ email, password, name }) {
+        const userAccount = await this.account.create(ID.unique(), email, password, name);
+        if (userAccount) {
+            // Call another method
+            return this.login({ email, password });
+        } else {
+            return userAccount;
         }
     }
+    
 
-    async login({email, password}) {
+    async login({ email, password }) {
         try {
             return await this.account.createEmailSession(email, password);
         } catch (error) {
+            // Handle error in some meaningful way, such as logging or displaying an error message
+            console.error("An error occurred during login:", error);
+            // Optionally rethrow the error if needed
             throw error;
         }
     }
+    
 
     async getCurrentUser() {
         try {
